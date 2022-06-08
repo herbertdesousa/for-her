@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
+/* eslint-disable jsx-a11y/no-autofocus */
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { v4 } from 'uuid';
 
@@ -11,6 +13,8 @@ const TextField: React.FC<ITextFieldProps> = ({ word, onWin }) => {
   const [typed, setTyped] = useState<string[]>([]);
 
   const [isWinner, setIsWinner] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const onChangeText = useCallback(
     (event: any) => {
@@ -37,17 +41,31 @@ const TextField: React.FC<ITextFieldProps> = ({ word, onWin }) => {
     [isWinner, onWin, typed.length, word],
   );
 
-  useEffect(() => {
-    document.addEventListener('keydown', onChangeText, false);
+  // useEffect(() => {
+  //   document.addEventListener('keydown', onChangeText, false);
 
-    return () => {
-      document.removeEventListener('keydown', onChangeText, false);
-    };
-  }, [onChangeText]);
+  //   return () => {
+  //     document.removeEventListener('keydown', onChangeText, false);
+  //   };
+  // }, [onChangeText]);
 
   return (
     <div className="flex flex-col items-center">
-      <ul className="flex">
+      <input
+        ref={inputRef}
+        type="text"
+        autoFocus
+        onChange={evt => onChangeText({ key: evt.target.value })}
+        className="opacity-0"
+        value=""
+      />
+      <ul
+        role="button"
+        tabIndex={0}
+        className="flex"
+        onClick={() => inputRef.current?.focus()}
+        onKeyDown={() => inputRef.current?.focus()}
+      >
         {word.split('').map((item, index) => (
           <li
             key={v4()}

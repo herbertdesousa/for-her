@@ -10,7 +10,7 @@ const QuizI: React.FC = () => {
   const [isShowingNextButton, setIsShowingNextButton] = useState(false);
 
   return (
-    <div className="relative h-screen px-6 pt-16">
+    <div className="px-6 pt-16">
       <h1 className="text-2xl font-semibold">O que é? O que é?</h1>
       <p className="text-accent-4 mt-6">
         você tem e usa todo dia, se deixar cair no chão quebra o chão, vive sem
@@ -27,7 +27,7 @@ const QuizI: React.FC = () => {
         )}
       </div>
 
-      <div className="absolute bottom-8">
+      <div className="mt-64">
         <strong>Dica</strong>
         <span>* parente do nokia</span>
       </div>
